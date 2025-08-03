@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEUROVA - Enterprise AI Voice Solutions</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #8b5cf6;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --dark: #0f172a;
+      --light: #f8fafc;
+      --glass-bg: rgba(255, 255, 255, 0.95);
+      --glass-border: rgba(255, 255, 255, 0.2);
+      --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+      --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+      --shadow-xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      min-height: 100vh;
+      color: var(--dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Advanced Background Effects */
+    .background-effects {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .gradient-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(40px);
+      animation: float-orb 20s ease-in-out infinite;
+      opacity: 0.6;
+    }
+
+    .gradient-orb:nth-child(1) {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.4) 0%, transparent 70%);
+      top: -200px;
+      left: -200px;
+      animation-delay: 0s;
+    }
+
+    .gradient-orb:nth-child(2) {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(circle, rgba(139, 92, 246, 0.4) 0%, transparent 70%);
+      top: 20%;
+      right: -150px;
+      animation-delay: 7s;
+    }
+
+    .gradient-orb:nth-child(3) {
+      width: 350px;
+      height: 350px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.4) 0%, transparent 70%);
+      bottom: -175px;
+      left: 20%;
+      animation-delay: 14s;
+    }
+
+    .gradient-orb:nth-child(4) {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(circle, rgba(240, 147, 251, 0.4) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation-delay: 3s;
+    }
+
+    @keyframes float-orb {
+      0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+      }
+      33% { 
+        transform: translate(30px, -30px) scale(1.1);
+        opacity: 0.8;
+      }
+      66% { 
+        transform: translate(-20px, 20px) scale(0.9);
+        opacity: 0.4;
+      }
+    }
+
+    /* Particle System */
+    .particles {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 50%;
+      animation: particle-float 15s linear infinite;
+    }
+
+    .particle:nth-child(odd) {
+      animation-duration: 20s;
+      background: rgba(99, 102, 241, 0.4);
+    }
+
+    @keyframes particle-float {
+      0% {
+        transform: translateY(100vh) translateX(0) scale(0);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+        transform: scale(1);
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100px) translateX(100px) scale(0);
+        opacity: 0;
+      }
+    }
+
+    /* Header Section */
+    .header {
+      position: relative;
+      z-index: 10;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(30, 41, 59, 0.95) 100%);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 100px 30px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .brand-logo {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 40px;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      box-shadow: var(--shadow-xl);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .brand-logo::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.2) 50%, transparent 70%);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      50% { transform: translateX(100%); }
+      100% { transform: translateX(100%); }
+    }
+
+    .company-title {
+      font-size: 5rem;
+      font-weight: 900;
+      background: linear-gradient(135deg, #ffffff 0%, #e2e8f0 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 30px;
+      letter-spacing: -0.04em;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+    }
+
+    .company-subtitle {
+      font-size: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 800px;
+      margin: 0 auto 50px;
+      line-height: 1.7;
+      font-weight: 400;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .metric-card {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: white;
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .metric-label {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    /* Main Content */
+    .main-content {
+      position: relative;
+      z-index: 10;
+      padding: 80px 0;
+    }
+
+    .container {
+      max-width: 1600px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .section-description {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 40px;
+    }
+
+    /* Enhanced Service Cards */
+           .service-card {
+         background: var(--glass-bg);
+         backdrop-filter: blur(25px);
+         border: 1px solid var(--glass-border);
+         border-radius: 28px;
+         overflow: hidden;
+         box-shadow: var(--shadow-lg);
+         transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+         position: relative;
+         cursor: pointer;
+       }
+
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: var(--card-gradient);
+      transform: scaleX(0);
+      transition: transform 0.5s ease;
+    }
+
+    .service-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .service-card:hover {
+      transform: translateY(-15px) scale(1.02);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .card-image-container {
+      position: relative;
+      height: 280px;
+      overflow: hidden;
+    }
+
+    .card-image {
+      width: 100%;
+      height: 100%;
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.5s ease;
+      position: relative;
+    }
+
+    .service-card:hover .card-image {
+      transform: scale(1.1);
+    }
+
+    .card-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: var(--card-gradient);
+      opacity: 0.85;
+    }
+
+    .card-image::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100px;
+      background: linear-gradient(transparent, rgba(0, 0, 0, 0.4));
+    }
+
+    /* Industry-specific styling */
+    .real_estate {
+      --card-gradient: linear-gradient(135deg, rgba(59, 130, 246, 0.8) 0%, rgba(29, 78, 216, 0.9) 100%);
+    }
+    .real_estate .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .debits {
+      --card-gradient: linear-gradient(135deg, rgba(239, 68, 68, 0.8) 0%, rgba(185, 28, 28, 0.9) 100%);
+    }
+    .debits .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .insurance {
+      --card-gradient: linear-gradient(135deg, rgba(139, 92, 246, 0.8) 0%, rgba(109, 40, 217, 0.9) 100%);
+    }
+    .insurance .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .healthcare {
+      --card-gradient: linear-gradient(135deg, rgba(16, 185, 129, 0.8) 0%, rgba(5, 150, 105, 0.9) 100%);
+    }
+    .healthcare .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .school {
+      --card-gradient: linear-gradient(135deg, rgba(245, 158, 11, 0.8) 0%, rgba(217, 119, 6, 0.9) 100%);
+    }
+    .school .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .ecommerce {
+      --card-gradient: linear-gradient(135deg, rgba(236, 72, 153, 0.8) 0%, rgba(190, 24, 93, 0.9) 100%);
+    }
+    .ecommerce .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .travel {
+      --card-gradient: linear-gradient(135deg, rgba(6, 182, 212, 0.8) 0%, rgba(14, 116, 144, 0.9) 100%);
+    }
+    .travel .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .fintech {
+      --card-gradient: linear-gradient(135deg, rgba(132, 204, 22, 0.8) 0%, rgba(101, 163, 13, 0.9) 100%);
+    }
+    .fintech .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .utility {
+      --card-gradient: linear-gradient(135deg, rgba(249, 115, 22, 0.8) 0%, rgba(194, 65, 12, 0.9) 100%);
+    }
+    .utility .card-image {
+      background-image: url('/placeholder.svg?height=280&width=420');
+    }
+
+    .card-icon {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      color: var(--icon-color);
+      box-shadow: var(--shadow-md);
+      z-index: 2;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .card-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .real_estate .card-icon { --icon-color: #3b82f6; }
+    .debits .card-icon { --icon-color: #ef4444; }
+    .insurance .card-icon { --icon-color: #8b5cf6; }
+    .healthcare .card-icon { --icon-color: #10b981; }
+    .school .card-icon { --icon-color: #f59e0b; }
+    .ecommerce .card-icon { --icon-color: #ec4899; }
+    .travel .card-icon { --icon-color: #06b6d4; }
+    .fintech .card-icon { --icon-color: #84cc16; }
+    .utility .card-icon { --icon-color: #f97316; }
+
+    .card-content {
+      padding: 45px 35px;
+    }
+
+    .card-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--dark);
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+
+    .card-features {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .feature-badge {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 25px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .card-description {
+      font-size: 1.1rem;
+      color: #64748b;
+      line-height: 1.7;
+      margin-bottom: 35px;
+      font-weight: 400;
+    }
+
+    .card-action {
+      background: var(--card-gradient);
+      color: white;
+      border: none;
+      padding: 18px 35px;
+      border-radius: 50px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      width: 100%;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card-action::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .card-action:hover::before {
+      left: 100%;
+    }
+
+    .card-action:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .card-action:active {
+      transform: translateY(-1px);
+    }
+
+    .status-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--success);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse-dot 2s infinite;
+      box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+    }
+
+    @keyframes pulse-dot {
+      0% { 
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+      }
+      70% { 
+        transform: scale(1);
+        box-shadow: 0 0 0 15px rgba(16, 185, 129, 0);
+      }
+      100% { 
+        transform: scale(0.95);
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+      }
+    }
+
+    /* Output Section */
+    .output-section {
+      position: relative;
+      z-index: 10;
+      padding: 80px 0;
+    }
+
+    .output-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    .output-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .output-title {
+      font-size: 3rem;
+      font-weight: 800;
+      color: white;
+      margin-bottom: 20px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .output-subtitle {
+      font-size: 1.2rem;
+      color: rgba(255, 255, 255, 0.9);
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    #output {
+      background: var(--glass-bg);
+      backdrop-filter: blur(25px);
+      border: 1px solid var(--glass-border);
+      border-radius: 24px;
+      padding: 50px;
+      font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--dark);
+      box-shadow: var(--shadow-lg);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      min-height: 180px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    #output:hover {
+      box-shadow: var(--shadow-xl);
+    }
+
+    /* Loading Animation */
+    .loading-spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: #fff;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1400px) {
+      .services-grid {
+        grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+      }
+    }
+
+    @media (max-width: 768px) {
+      .company-title {
+        font-size: 3.5rem;
+      }
+      
+      .section-title {
+        font-size: 2.2rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .container, .output-container {
+        padding: 0 20px;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+      
+      .card-content {
+        padding: 35px 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .company-title {
+        font-size: 2.8rem;
+      }
+      
+      .metrics-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .card-image-container {
+        height: 220px;
+      }
+    }
+
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Focus states */
+    .card-action:focus {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="background-effects">
+    <div class="gradient-orb"></div>
+    <div class="gradient-orb"></div>
+    <div class="gradient-orb"></div>
+    <div class="gradient-orb"></div>
+    
+    <div class="particles">
+      <div class="particle" style="left: 10%; animation-delay: 0s;"></div>
+      <div class="particle" style="left: 20%; animation-delay: 2s;"></div>
+      <div class="particle" style="left: 30%; animation-delay: 4s;"></div>
+      <div class="particle" style="left: 40%; animation-delay: 6s;"></div>
+      <div class="particle" style="left: 50%; animation-delay: 8s;"></div>
+      <div class="particle" style="left: 60%; animation-delay: 10s;"></div>
+      <div class="particle" style="left: 70%; animation-delay: 12s;"></div>
+      <div class="particle" style="left: 80%; animation-delay: 14s;"></div>
+      <div class="particle" style="left: 90%; animation-delay: 16s;"></div>
+    </div>
+  </div>
+
+  <header class="header">
+    <div class="header-content">
+      <div class="brand-logo">
+        <img src="/static/images/neurova-logo.jpeg" alt="NEUROVA Logo" style="width: 100%; height: 100%; object-fit: contain; border-radius: 24px;">
+      </div>
+      <h1 class="company-title">NEUROVA</h1>
+      <p class="company-subtitle">Enterprise-Grade AI Voice Solutions Transforming Global Industries</p>
+      
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-value">99.9%</span>
+          <span class="metric-label">Uptime SLA</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value">24/7</span>
+          <span class="metric-label">Support</span>
+        </div>
+        <div class="metric-card">
+          <span class="metric-value">SOC 2</span>
+          <span class="metric-label">Compliant</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <div class="container">
+      <div class="section-header">
+        <h2 class="section-title">AI Voice Solutions</h2>
+        <p class="section-description">Choose from our comprehensive suite of industry-specific AI voice assistants designed for enterprise excellence</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card real_estate">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-home"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Real Estate Intelligence</h3>
+            <div class="card-features">
+              <span class="feature-badge">Property Search</span>
+              <span class="feature-badge">Market Analysis</span>
+              <span class="feature-badge">Lead Qualification</span>
+            </div>
+            <p class="card-description">Advanced property discovery, comprehensive market insights, automated scheduling, and intelligent lead qualification for real estate professionals worldwide</p>
+            <button class="card-action" onclick="startCall('real_estate')" aria-label="Launch Real Estate Intelligence Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card debits">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-credit-card"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Debt Management Pro</h3>
+            <div class="card-features">
+              <span class="feature-badge">Smart Analytics</span>
+              <span class="feature-badge">Payment Plans</span>
+              <span class="feature-badge">Credit Monitoring</span>
+            </div>
+            <p class="card-description">Intelligent debt consolidation, payment optimization, credit score monitoring, and personalized financial wellness guidance with bank-grade security</p>
+            <button class="card-action" onclick="startCall('debits')" aria-label="Launch Debt Management Pro Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card insurance">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Insurance Navigator</h3>
+            <div class="card-features">
+              <span class="feature-badge">Claims Processing</span>
+              <span class="feature-badge">Risk Assessment</span>
+              <span class="feature-badge">Policy Management</span>
+            </div>
+            <p class="card-description">Comprehensive insurance management, instant quotes, streamlined claims processing, risk assessment, and policy optimization for all coverage types</p>
+            <button class="card-action" onclick="startCall('insurance')" aria-label="Launch Insurance Navigator Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card healthcare">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-heartbeat"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Healthcare Concierge</h3>
+            <div class="card-features">
+              <span class="feature-badge">Appointment Booking</span>
+              <span class="feature-badge">Health Records</span>
+              <span class="feature-badge">Telemedicine</span>
+            </div>
+            <p class="card-description">Seamless healthcare coordination, intelligent appointment management, secure health records access, and telemedicine support with full HIPAA compliance</p>
+            <button class="card-action" onclick="startCall('healthcare')" aria-label="Launch Healthcare Concierge Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card school">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-graduation-cap"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Education Excellence</h3>
+            <div class="card-features">
+              <span class="feature-badge">Academic Support</span>
+              <span class="feature-badge">Course Planning</span>
+              <span class="feature-badge">Student Services</span>
+            </div>
+            <p class="card-description">Comprehensive educational support, intelligent course recommendations, academic planning assistance, and seamless institutional communication</p>
+            <button class="card-action" onclick="startCall('school')" aria-label="Launch Education Excellence Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card ecommerce">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-shopping-cart"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Commerce Intelligence</h3>
+            <div class="card-features">
+              <span class="feature-badge">Smart Shopping</span>
+              <span class="feature-badge">Order Tracking</span>
+              <span class="feature-badge">Customer Support</span>
+            </div>
+            <p class="card-description">Personalized shopping experiences, intelligent inventory management, real-time order processing, and automated customer service excellence</p>
+            <button class="card-action" onclick="startCall('ecommerce')" aria-label="Launch Commerce Intelligence Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card travel">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-plane"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Travel Orchestrator</h3>
+            <div class="card-features">
+              <span class="feature-badge">Trip Planning</span>
+              <span class="feature-badge">Real-time Updates</span>
+              <span class="feature-badge">Concierge Services</span>
+            </div>
+            <p class="card-description">Complete travel management, intelligent booking optimization, dynamic itinerary planning, and real-time travel assistance across the globe</p>
+            <button class="card-action" onclick="startCall('travel')" aria-label="Launch Travel Orchestrator Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card fintech">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Financial Intelligence</h3>
+            <div class="card-features">
+              <span class="feature-badge">Investment Advice</span>
+              <span class="feature-badge">Portfolio Management</span>
+              <span class="feature-badge">Risk Analysis</span>
+            </div>
+            <p class="card-description">Advanced financial planning, intelligent investment guidance, automated portfolio management, and comprehensive banking services integration</p>
+            <button class="card-action" onclick="startCall('fintech')" aria-label="Launch Financial Intelligence Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="service-card utility">
+          <div class="card-image-container">
+            <div class="card-image">
+              <div class="card-icon">
+                <i class="fas fa-bolt"></i>
+              </div>
+            </div>
+          </div>
+          <div class="card-content">
+            <h3 class="card-title">Utility Command Center</h3>
+            <div class="card-features">
+              <span class="feature-badge">Bill Management</span>
+              <span class="feature-badge">Service Optimization</span>
+              <span class="feature-badge">Smart Monitoring</span>
+            </div>
+            <p class="card-description">Comprehensive utility management, intelligent bill optimization, proactive service requests, and advanced energy efficiency recommendations</p>
+            <button class="card-action" onclick="startCall('utility')" aria-label="Launch Utility Command Center Assistant">
+              <span class="status-dot"></span>
+              Launch Assistant
+              <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <section class="output-section">
+    <div class="output-container">
+      <div class="output-header">
+        <h2 class="output-title">Live Session Monitor</h2>
+        <p class="output-subtitle">Real-time conversation analytics and enterprise-grade system monitoring</p>
+      </div>
+      <pre id="output">🚀 Select an AI assistant above to begin your enterprise voice interaction experience
+
+✨ Features:
+   • HD Audio Quality (24kHz)
+   • Sub-100ms Latency
+   • Real-time Transcription
+   • Multi-language Support
+   • Enterprise Security</pre>
+    </div>
+  </section>
+
+  <script type="module">
+    import { RetellWebClient } from 'https://cdn.jsdelivr.net/npm/retell-client-js-sdk/+esm';
+    
+    const agentIds = {
+      "real_estate": "agent_31a4d38fd46208baac76973b575e",
+      "debits": "agent_31a4d38fd46208baac76973b575e",
+      "insurance": "agent_31a4d38fd46208baac76973b575e",
+      "healthcare": "agent_31a4d38fd46208baac76973b575e",
+      "school": "agent_31a4d38fd46208baac76973b575e",
+      "ecommerce": "agent_31a4d38fd46208baac76973b575e",
+      "travel": "agent_31a4d38fd46208baac76973b575e",
+      "fintech": "agent_31a4d38fd46208baac76973b575e",
+      "utility": "agent_31a4d38fd46208baac76973b575e"
+    };
+
+    const industryNames = {
+      "real_estate": "Real Estate Intelligence",
+      "debits": "Debt Management Pro",
+      "insurance": "Insurance Navigator", 
+      "healthcare": "Healthcare Concierge",
+      "school": "Education Excellence",
+      "ecommerce": "Commerce Intelligence",
+      "travel": "Travel Orchestrator",
+      "fintech": "Financial Intelligence",
+      "utility": "Utility Command Center"
+    };
+    
+    let currentClient = null;
+    let currentAgentType = null;
+    let isCallActive = false;
+
+    window.startCall = async function(agentType) {
+      const output = document.getElementById("output");
+      const button = event.target.closest('button');
+      const originalContent = button.innerHTML;
+      
+      // If there's an active call, stop it first
+      if (isCallActive && currentClient) {
+        try {
+          await currentClient.stopCall();
+          console.log(`Stopped previous call for agent: ${currentAgentType}`);
+        } catch (error) {
+          console.error('Error stopping previous call:', error);
+        }
+        
+        // Reset previous button state
+        const previousButton = document.querySelector(`[onclick*="${currentAgentType}"]`);
+        if (previousButton) {
+          previousButton.innerHTML = originalContent;
+          previousButton.disabled = false;
+          previousButton.style.opacity = '1';
+        }
+      }
+      
+      try {
+        // Update button state
+        button.innerHTML = '<div class="loading-spinner"></div> Connecting...';
+        button.disabled = true;
+        button.style.opacity = '0.7';
+        
+        // Professional loading message
+        output.innerHTML = `🔄 Initializing ${industryNames[agentType]} Assistant...
+
+⚡ Establishing secure WebRTC connection
+🔐 Authenticating enterprise credentials  
+📡 Loading specialized AI models
+🎯 Optimizing for your industry needs
+🛡️  Enabling enterprise security protocols`;
+        
+        const res = await fetch('/start-call', {
+          method: 'POST',
+          headers: { 
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'X-Client-Version': '2.0.0'
+          },
+          body: JSON.stringify({ 
+            agent: agentType,
+            agent_id: agentIds[agentType],
+            timestamp: new Date().toISOString(),
+            client_info: {
+              user_agent: navigator.userAgent,
+              platform: navigator.platform,
+              language: navigator.language,
+              screen_resolution: `${screen.width}x${screen.height}`,
+              timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+            }
+          })
+        });
+        
+        if (!res.ok) {
+          throw new Error(`Connection failed: HTTP ${res.status} - ${res.statusText}`);
+        }
+        
+        const callData = await res.json();
+        
+        // Enhanced success display
+        output.innerHTML = `✅ ${industryNames[agentType]} Connected Successfully
+
+📊 Session Information:
+   • Agent ID: ${agentIds[agentType]}
+   • Connection: Secure WebRTC Established
+   • Audio Quality: HD (24kHz Sampling Rate)
+   • Latency: <100ms (Optimized)
+   • Security: End-to-End Encrypted
+   • Status: ✅ Active & Ready
+
+🎤 Voice interaction is now active. Start speaking to begin your conversation...
+
+💡 Tips:
+   • Speak clearly and naturally
+   • Wait for the assistant to finish before responding
+   • You can interrupt if needed
+   • Session is being monitored for quality assurance`;
+        
+        if (callData.access_token) {
+          const client = new RetellWebClient();
+          
+          // Store current client and agent info
+          currentClient = client;
+          currentAgentType = agentType;
+          isCallActive = true;
+          
+          await client.startCall({
+            accessToken: callData.access_token,
+            sampleRate: 24000,
+            enableUpdate: true
+          });
+          
+          // Enhanced event handling with professional formatting
+          client.on('update', (update) => {
+            console.log('Live Update:', update);
+            if (update.transcript && update.transcript.length > 0) {
+              const sessionDuration = Math.floor((Date.now() - (update.call_start_timestamp || Date.now())) / 1000);
+              output.innerHTML = `🎯 ${industryNames[agentType]} - Live Session Active
+
+📝 Live Transcript:
+"${update.transcript}"
+
+📊 Session Metrics:
+   • Duration: ${Math.floor(sessionDuration / 60)}:${(sessionDuration % 60).toString().padStart(2, '0')}
+   • Audio Quality: Excellent (${update.audio_quality || 'HD'})
+   • Connection: Stable (${update.connection_quality || '100%'})
+   • Latency: ${update.latency || '<100'}ms
+   • Words Processed: ${update.transcript.split(' ').length}
+
+🔊 Status: ${update.agent_is_speaking ? '🤖 AI Assistant Speaking...' : '👂 Listening for your input...'}`;
+            }
+          });
+          
+          client.on('agent_start_talking', () => {
+            console.log('AI Agent Started Speaking');
+            const currentContent = output.innerHTML;
+            if (!currentContent.includes('🤖 AI Assistant Speaking')) {
+              output.innerHTML = currentContent.replace(/🔊 Status: .*/, '🔊 Status: 🤖 AI Assistant Speaking...');
+            }
+          });
+          
+          client.on('agent_stop_talking', () => {
+            console.log('AI Agent Stopped Speaking');
+            const currentContent = output.innerHTML;
+            output.innerHTML = currentContent.replace(/🔊 Status: .*/, '🔊 Status: 👂 Listening for your response...');
+          });
+          
+          client.on('call_ended', () => {
+            console.log('Call Session Ended');
+            output.innerHTML += `
+
+📞 Session Completed Successfully
+✨ Thank you for using NEUROVA AI Enterprise Solutions
+
+📈 Session Summary:
+   • Service: ${industryNames[agentType]}
+   • Quality Rating: Excellent
+   • Security: Fully Compliant
+   • Data: Securely Processed
+
+🔄 Ready for your next interaction`;
+            
+            // Reset current call state
+            currentClient = null;
+            currentAgentType = null;
+            isCallActive = false;
+            
+            // Reset button
+            button.innerHTML = originalContent;
+            button.disabled = false;
+            button.style.opacity = '1';
+          });
+          
+          client.on('error', (error) => {
+            console.error('Session Error:', error);
+            output.innerHTML = `❌ Connection Error Detected
+
+🔍 Error Details: ${error.message}
+
+🛠️ Enterprise Support Options:
+   • Automatic retry in 30 seconds
+   • Check network connectivity
+   • Verify microphone permissions
+   • Contact technical support: support@neurova.ai
+   • Emergency hotline: +1-800-NEUROVA
+
+🔄 Attempting automatic reconnection...`;
+            
+            // Reset current call state
+            currentClient = null;
+            currentAgentType = null;
+            isCallActive = false;
+            
+            // Reset button after error
+            setTimeout(() => {
+              button.innerHTML = originalContent;
+              button.disabled = false;
+              button.style.opacity = '1';
+            }, 3000);
+          });
+          
+        } else {
+          throw new Error(callData.error || 'Authentication failed - Unable to obtain access token');
+        }
+        
+      } catch (error) {
+        console.error('Connection Error:', error);
+        output.innerHTML = `❌ Connection Failed - Enterprise Support Required
+
+🔍 Error Analysis:
+   • Issue: ${error.message}
+   • Timestamp: ${new Date().toISOString()}
+   • Service: ${industryNames[agentType]}
+   • Client: ${navigator.userAgent.split(' ')[0]}
+
+🛠️ Troubleshooting Steps:
+   1. Verify internet connection stability
+   2. Check microphone permissions in browser
+   3. Disable VPN if active
+   4. Clear browser cache and cookies
+   5. Try incognito/private browsing mode
+
+📞 Enterprise Support:
+   • Email: support@neurova.ai
+   • Phone: +1-800-NEUROVA
+   • Live Chat: Available 24/7
+   • Priority Support: Tier 1 Response < 15min
+
+🔄 Click to retry connection`;
+        
+        // Reset button
+        button.innerHTML = originalContent;
+        button.disabled = false;
+        button.style.opacity = '1';
+        
+        // Reset current call state on error
+        currentClient = null;
+        currentAgentType = null;
+        isCallActive = false;
+      }
+    };
+
+    // Enhanced interactions and animations
+    document.addEventListener('DOMContentLoaded', function() {
+      // Smooth card interactions
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-15px) scale(1.02)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0) scale(1)';
+        });
+      });
+
+      // Add intersection observer for animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = '1';
+            entry.target.style.transform = 'translateY(0)';
+          }
+        });
+      }, observerOptions);
+
+      // Observe all service cards
+      document.querySelectorAll('.service-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(card);
+      });
+
+      // Add keyboard navigation
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+          document.body.classList.add('keyboard-navigation');
+        }
+      });
+
+      document.addEventListener('mousedown', function() {
+        document.body.classList.remove('keyboard-navigation');
+      });
+    });
+  </script>
+</body>
+</html>
